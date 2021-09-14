@@ -3,7 +3,7 @@
   <div
     class="fixed z-10 inset-0 overflow-y-auto"
     id="modal"
-    :class="{ hidden: !authModalShow }"
+    :class="{ hidden: !modal }"
   >
     <div
       class="
@@ -310,23 +310,33 @@
 </template>
 
 <script>
-import { mapMutations, mapState } from 'vuex';
+import { mapMutations, mapState } from "vuex";
 
+/*
+getters vs. Mapping State
+getter: better for performing calculation
+mapping to state: better for tetrieving state property
+*/
 export default {
-  name: 'Auth',
+  name: "Auth",
   data() {
     return {
-      tab: 'login',
+      tab: "login",
     };
   },
   computed: {
-    // ...mapState({
-    //   modal: 'authModalShow',
-    // }),
-    ...mapState(['authModalShow']),
+    // mapping getters, removes the necessaty
+    // of the individual getters function
+    //...mapState(["authModalShow"]),
+    ...mapState({
+      modal: "authModalShow",
+    }),
   },
   methods: {
-    ...mapMutations(['toggleAuthModal']),
+    // mutation is available at the authentication component
+
+    ...mapMutations(["toggleAuthModal"]),
   },
 };
 </script>
+
